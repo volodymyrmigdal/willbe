@@ -43,4 +43,4 @@ jobs :
       run : env
     - run : npm list
       continue-on-error : true
-    - run : npm test
+    - run : node proto/wtools/atop/will.test/Ext.test.s v:10 r:"submodulesDownload*"
