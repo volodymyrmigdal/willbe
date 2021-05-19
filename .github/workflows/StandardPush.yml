@@ -16,8 +16,32 @@ jobs :
         os : [ ubuntu-latest, windows-latest, macos-latest ]
         node-version : [ 14.x ]
         test-job :
-          - 'Int.test.s rapidity:-1'
-          - 'Ext.test.s rapidity:-1 r:"reflect*"'
+          - 'Int.test.s'
+          - 'Ext.test.s r:"reflect*"'
+          - 'Ext.test.s r:"withDo*"'
+          - 'Ext.test.s r:"hook*"'
+          - 'Ext.test.s r:"imply*"'
+          - 'Ext.test.s r:"verbosity*"'
+          - 'Ext.test.s r:"module*"'
+          - 'Ext.test.s r:"list*"'
+          - 'Ext.test.s r:"build*"'
+          - 'Ext.test.s r:"export*"'
+          - 'Ext.test.s r:"import*"'
+          - 'Ext.test.s r:"clean*"'
+          - 'Ext.test.s r:"shell*"'
+          - 'Ext.test.s r:"function*"'
+          - 'Ext.test.s r:"submodules*"'
+          - 'Ext.test.s r:"version*"'
+          - 'Ext.test.s r:"step*"'
+          - 'Ext.test.s r:"commandImply*"'
+          - 'Ext.test.s r:"commandVersion*"'
+          - 'Ext.test.s r:"commandSubmodules*"'
+          - 'Ext.test.s r:"commandModules*"'
+          - 'Ext.test.s r:"commandGit*"'
+          - 'Ext.test.s r:"commandRepo*"'
+          - 'Ext.test.s r:"commandNpm*"'
+          - 'Ext.test.s r:"commandWill*"'
+          - 'Ext.test.s r:"commands*"'
     if : "!startsWith( github.event.head_commit.message, 'version' ) && !startsWith( github.event.head_commit.message, '.' )"
     runs-on : ${{ matrix.os }}
     steps :
@@ -46,4 +70,4 @@ jobs :
       run : env
     - run : npm list
       continue-on-error : true
-    - run : npm run tester proto/wtools/atop/will.test/${{ matrix.test-job }}
+    - run : node proto/wtools/atop/will.test/${{ matrix.test-job }} rapidity:-1
