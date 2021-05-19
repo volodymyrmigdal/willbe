@@ -26,7 +26,7 @@ jobs :
           - 'Ext.test.s r:"step*"'
           - 'Ext.test.s r:"command*"'
           - 'Ext.test.s r:"[ withDo*, hook*, imply*, verbosity*, list*, shell*, function* ]"'
-          - 'npm test'
+          - 'Normal run'
     if : "!startsWith( github.event.head_commit.message, 'version' ) && !startsWith( github.event.head_commit.message, '.' )"
     runs-on : ${{ matrix.os }}
     steps :
@@ -55,7 +55,7 @@ jobs :
       run : env
     - run : npm list
       continue-on-error : true
-    - if : "!startsWith( ${{ matrix.test-job }}, 'npm test' )"
+    - if : "${{ matrix.test-job == 'Normal run' }}"
       run : node proto/wtools/atop/will.test/${{ matrix.test-job }} rapidity:-1
-    - if : "startsWith( ${{ matrix.test-job }}, 'npm test' )"
+    - if : "${{ matrix.test-job != 'Normal run' }}"
       run : npm test
