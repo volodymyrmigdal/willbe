@@ -55,7 +55,8 @@ jobs :
       run : env
     - run : npm list
       continue-on-error : true
-    - if : "${{ matrix.test-job == 'Normal run' }}"
+    - name : ${{ matrix.test-job }}
+      if : "${{ matrix.test-job != 'Normal run' }}"
       run : node proto/wtools/atop/will.test/${{ matrix.test-job }} rapidity:-1
-    - if : "${{ matrix.test-job != 'Normal run' }}"
+    - if : "${{ matrix.test-job == 'Normal run' }}"
       run : npm test
