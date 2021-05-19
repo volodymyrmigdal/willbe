@@ -16,10 +16,8 @@ jobs :
         os : [ ubuntu-latest, windows-latest, macos-latest ]
         node-version : [ 14.x ]
         test-job :
-        [
-          "Int.test.s rapidity:-1",
-          "Ext.test.s rapidity:-1 r:"reflect*"",
-        ]
+          - 'Int.test.s rapidity:-1'
+          - 'Ext.test.s rapidity:-1 r:"reflect*"'
     if : "!startsWith( github.event.head_commit.message, 'version' ) && !startsWith( github.event.head_commit.message, '.' )"
     runs-on : ${{ matrix.os }}
     steps :
